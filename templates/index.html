@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container border" style="margin-top: 100px; padding-top: 70px; padding-bottom: 70px; margin-bottom: 100px;">
+        <div class="row">
+            <div class="col col-12 text-center">
+                <h1 class="center">Enter a username to get in the conversation</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col justify-content-between">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="UserName" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col col-12 text-center">
+                <a href="#" id="btn1" class="btn btn-primary">Get In</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("btn1").addEventListener("click", function() {
+            username = document.getElementById("username").value
+            console.log(username)
+            window.location.href = "http://127.0.0.1:8000/user/" + username
+        })
+    </script>
+</body>
+
+</html>

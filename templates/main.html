@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container border" style="margin-top: 70px; margin-bottom: 70px; padding-top: 20px;">
+        <div id="container" class="container">
+
+
+        </div>
+        <div class="row">
+            <div class="col col-9">
+                <div class="form-group">
+                    <input type="text" id="message" placeholder="Type a message" class="form-control">
+                </div>
+            </div>
+            <div class="col col-3">
+                <a href="" id="button" class="btn btn-primary btn-block">Send</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script>
+        const socket = io()
+        document.getElementById("button").addEventListener("click", function(e) {
+            /* mess = document.getElementById("mess").value
+             let route = window.location + mess
+             console.log(route)*/
+
+
+
+            e.preventDefault()
+            const msj = document.getElementById("message").value
+            const date = new Date()
+
+            const hora = date.getHours() + ":" + date.getMinutes()
+
+            const fecha = {
+                "day": date.getDate(),
+                "month": date.getMonth() + 1,
+                "year": date.getFullYear(),
+                "hour": date.getHours(),
+                "minute": date.getMinutes()
+            }
+
+            const info = {
+                "user": window.location.href.split("/")[4],
+                "fecha": fecha,
+                "message": msj
+            }
+            socket.send(info)
+
+            document.getElementById("message").value = ""
+        })
+
+        socket.on("message", function(info) {
+            console.log(info)
+
+            const container = document.getElementById("container")
+
+            const element = document.createElement("div")
+
+            var color = "",
+                align = ""
+            if (info.user == window.location.href.split("/")[4]) {
+                color = "primary"
+                align = "right"
+            } else {
+                color = "light"
+                align = "left"
+            }
+
+
+
+            element.innerHTML = `
+            <div class="card text-${align} mb-4 bg-${color}">
+                <div class="card-body">
+                    <strong>From </strong>: ${info.user}
+                    <strong>At </strong>: ${info.fecha.hour+":"+info.fecha.minute}
+                    <strong>Message </strong>: ${info.message}
+                </div>
+            </div>`
+
+            container.appendChild(element)
+
+        })
+    </script>
+</body>
+
+</html>
