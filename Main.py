@@ -1,13 +1,10 @@
 from flask import Flask
 from flask import render_template
-from conversation import *
 from flask_socketio import SocketIO, send
 
 
 app= Flask(__name__)
 app.config["SECRET_KEY"]="secret"
-
-conversation= Conversation()
 
 socket= SocketIO(app)
 
@@ -17,14 +14,18 @@ def index():
 
 @app.route("/user/<user>")
 def users(user):
-    if not conversation.validate_member(user):
-        conversation.members.append(user)
-    
-    return render_template("main.html", mess=conversation.to_string())
+    return render_template("main.html", user=user )
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
 
 @socket.on("message")
 def handle_message(info):
-    print(info)
     send(info, broadcast=True)
 
 if __name__=="__main__":
