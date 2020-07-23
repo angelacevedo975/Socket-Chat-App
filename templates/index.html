@@ -6,42 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 </head>
 
 <body>
     {% include 'inc/navbar.html' %}
 
-    <div class="container border" style="margin-top: 100px; padding-top: 70px; padding-bottom: 70px; margin-bottom: 100px;">
-        <div class="row">
-            <div class="col col-12 text-center">
-                <h1 class="center">My ChatApp</h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col justify-content-between">
-                <div class="form-group">
-                    <input type="text" id="username" placeholder="UserName" class="form-control">
+    <div class="container m-5">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">My Chat App</h1>
+                <p class="lead">This is proof of how the sockets works. Also you can login and signup to save your messages and data</p>
+                <div class="container row">
+                    <div class="col col-4">
+                        <a href="/login" class="btn btn-dark btn-block">Login now</a>
+                    </div>
+                    <div class="col col-4">
+                        <a href="/signup" class="btn btn-dark btn-block">Signup now</a>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-
-        <div class="row">
-            <div class="col col-12 text-center">
-                <a href="#" id="btn1" class="btn btn-primary">Get In</a>
             </div>
         </div>
 
     </div>
 
-    <script>
-        document.getElementById("btn1").addEventListener("click", function() {
-            username = document.getElementById("username").value
-            console.log(username)
-            window.location.href = "http://127.0.0.1:8000/user/" + username
-        })
-    </script>
+    <style>
+        body {
+            background: #373B44;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #4286f4, #373B44);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #4286f4, #373B44);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+    </style>
 </body>
 
 </html>
